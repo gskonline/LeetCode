@@ -1,0 +1,27 @@
+public class Solution {
+    public bool RepeatedSubstringPattern(string str) {
+             var sList = str.ToCharArray().ToList();
+            int num = 0;
+            int len = str.Length;
+            int t;
+            for (int i = 0; i < len; i++)
+            {
+                if (sList[i] == sList[0] && num == 0)
+                {
+                    if (len == 2 && i>0) return true;
+                    num = i;}
+                if (num != 0)
+                {
+                    if (str.Length % num != 0) return false;
+                    t = (num == 1) ? len / num - 1: len / num ;
+                    for (int j = 0; j < t; j++)
+                    {
+                        if (sList[j] != sList[j + num]) return false;
+                    }
+                }
+            }
+            if (num == 0) return false;
+            return true;
+
+    }
+}
