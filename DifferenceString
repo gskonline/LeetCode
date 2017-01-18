@@ -1,0 +1,15 @@
+public class Solution {
+    public char FindTheDifference(string s, string t) {
+    List<char> sList = s.ToCharArray().ToList();
+    List<char> tList = t.ToCharArray().ToList();
+    sList.Sort();
+    tList.Sort();
+    
+    for(int i=0;i<s.Length;i++)
+    {
+        if (tList[i] != sList[i]) return tList[i]; 
+    }
+    
+    return tList[s.Length];
+    }
+}
