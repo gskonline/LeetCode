@@ -1,29 +1,37 @@
-using System.Text;
-using System.Collections;
-
 public class Solution {
-    public string ReverseVowels(string s) {
-var arrStr = s.ToCharArray();
-string str = "aeiouAEIOU"; 
-ArrayList arList = new ArrayList();
-StringBuilder sb = new StringBuilder();
-for (int i=0;i<arrStr.Length;i++)
-{
-    if(str.Contains(arrStr[i]))
-    {
-        sb.Append("*");
-        arList.Add(arrStr[i]);
+    public string[] FindWords(string[] words) {
+        
+        var wordsList = words.ToList();
+         
+         for(int i = 0; i< wordsList.Count - 1; i++)
+         {
+          if(CheckWord(wordsList[i])) wordsList.RemoveAt(i);
+             
+         }
+         return wordsList.ToArray();
+         
     }
-    else
+    
+    private bool CheckWord(string word)
     {
-       sb.Append(s.Substring(i,1)) ;
-    }
-}
-for (int i = 0; i<arList.Count;i++)
-{
-    sb.Insert(sb.ToString().IndexOf("*"),arList[arList.Count -1 - i]);
-    sb.Remove(sb.ToString().IndexOf("*"),1);
-}
-return sb.ToString();
+         List<string> strList = new List<string>(){"QWERTYUIOP","ASDFGHJKL","ZXCVBNM"};
+         var wordArray =  word.ToCharArray().Distinct().ToArray();
+
+         int j = 0;
+         int homeIndex = -1;
+         
+          do
+        {  if (strList[j].Contains(wordArray[0])) homeIndex = j;
+            j++;
+        } while (homeIndex < 0);
+             
+         for (int i = 0; i < wordArray.Length -1; i++)
+         {
+            if (!strList[homeIndex].Contains(wordArray[i])) return true;
+             
+         }
+         
+         
+        return false;
     }
 }
